@@ -1,0 +1,29 @@
+// download: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+// documentation: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+@pathURL = http://localhost:3001
+@childAddress = 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
+// childAddressToken6: 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
+@rootAddress = 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+// rootAddressToken6: 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+@owner = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
+@from = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
+@to = 0x43e6B95803ac909f31C46517691cd2e33e298e40
+
+// POSContracts:
+@predicate = 0x56E14C4C1748a818a5564D33cF774c59EB3eDF59
+// ERC721PredicateProxy: 0x74D83801586E9D3C4dc45FfCD30B54eA9C88cf9b
+// MintableERC721PredicateProxy: 0x56E14C4C1748a818a5564D33cF774c59EB3eDF59
+@operator = 0xBbD7cBFA79faee899Eaf900F13C9065bF03B1A74
+// RootChainManager: 0xBbD7cBFA79faee899Eaf900F13C9065bF03B1A74 // RootChainManagerProxy
+
+###
+POST {{pathURL}}/api/chain/depositFor HTTP/1.1
+content-type: application/json
+
+{
+   "userAddress": "{{from}}",
+   "rootToken": "{{rootAddress}}",
+   "tokenId": 1
+}
+###

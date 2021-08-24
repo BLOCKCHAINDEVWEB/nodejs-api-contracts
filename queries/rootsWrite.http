@@ -1,0 +1,57 @@
+// download: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+// documentation: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+@pathURL = http://localhost:3001
+@childAddress = 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
+// childAddressToken6: 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
+@rootAddress = 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+// rootAddressToken6: 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+@owner = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
+@from = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
+@to = 0x43e6B95803ac909f31C46517691cd2e33e298e40
+
+// POSContracts:
+@predicate = 0x56E14C4C1748a818a5564D33cF774c59EB3eDF59
+// ERC721PredicateProxy: 0x74D83801586E9D3C4dc45FfCD30B54eA9C88cf9b
+// MintableERC721PredicateProxy: 0x56E14C4C1748a818a5564D33cF774c59EB3eDF59
+@operator = 0xBbD7cBFA79faee899Eaf900F13C9065bF03B1A74
+// RootChainManager: 0xBbD7cBFA79faee899Eaf900F13C9065bF03B1A74 // RootChainManagerProxy
+
+###
+POST {{pathURL}}/api/root/grantRole HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "rootToken": "{{rootAddress}}",
+  "predicate": "{{predicate}}",
+  "role": "0x12ff340d0cd9c652c747ca35727e68c547d0f0bfa7758d2e77f75acef481b4f2"
+}
+###
+POST {{pathURL}}/api/root/approve HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "rootToken": "{{rootAddress}}",
+  "to": "{{predicate}}",
+  "tokenId": 1
+}
+###
+POST {{pathURL}}/api/root/approvalAll HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "operator": "{{predicate}}",
+  "approved": true
+}
+###
+POST {{pathURL}}/api/root/deposit HTTP/1.1
+content-type: application/json
+
+{
+   "user": "{{from}}",
+   "rootToken": "{{rootAddress}}",
+   "tokenId": 1
+}

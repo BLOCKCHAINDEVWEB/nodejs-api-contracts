@@ -1,0 +1,23 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r esm index.js",
+    "dev": "nodemon -r esm index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.1",
+    "esm": "^3.2.25",
+    "eth-sig-util": "^3.0.1",
+    "ethereumjs-util": "^7.1.0",
+    "ethers": "^5.4.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
