@@ -2,10 +2,12 @@
 // documentation: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 
 @pathURL = http://localhost:3001
-@childAddress = 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
+@childAddress = 0x554DAc4f6d076290dBa8469E9F2d1090A6DEd458
 // childAddressToken6: 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
-@rootAddress = 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+// childAddressToken7: 0x554DAc4f6d076290dBa8469E9F2d1090A6DEd458
+@rootAddress = 0x5E891015ED99d7C5c9eB5527658B4649F3f26c45
 // rootAddressToken6: 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+// rootAddressToken7: 0x5E891015ED99d7C5c9eB5527658B4649F3f26c45
 @owner = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
 @from = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
 @to = 0x43e6B95803ac909f31C46517691cd2e33e298e40
@@ -28,6 +30,25 @@ content-type: application/json
   "role": "0x12ff340d0cd9c652c747ca35727e68c547d0f0bfa7758d2e77f75acef481b4f2"
 }
 ###
+POST {{pathURL}}/api/root/mint HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "metadataCid": "QmZeYychcKrodnKo72JeSNdimeJ6AukrSNaPmsT2NpzdWE",
+  "rootToken": "{{rootAddress}}"
+}
+###
+POST {{pathURL}}/api/root/execMetadata HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "to": "{{to}}",
+  "nftAddress": "{{rootAddress}}",
+  "tokenId": 6
+}
+###
 POST {{pathURL}}/api/root/approve HTTP/1.1
 content-type: application/json
 
@@ -35,7 +56,16 @@ content-type: application/json
   "from": "{{from}}",
   "rootToken": "{{rootAddress}}",
   "to": "{{predicate}}",
-  "tokenId": 1
+  "tokenId": 6
+}
+###
+POST {{pathURL}}/api/root/approveWithMatic HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{owner}}",
+  "rootToken": "{{rootAddress}}",
+  "tokenId": "6"
 }
 ###
 POST {{pathURL}}/api/root/approvalAll HTTP/1.1
@@ -53,5 +83,33 @@ content-type: application/json
 {
    "user": "{{from}}",
    "rootToken": "{{rootAddress}}",
-   "tokenId": 1
+   "tokenId": 3
 }
+###
+POST {{pathURL}}/api/root/depositWithMatic HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "rootToken": "{{rootAddress}}",
+  "tokenId": "6"
+}
+###
+POST {{pathURL}}/api/root/exitsWithMatic HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "to": "{{predicate}}",
+  "burnHash": "0x0449e4e62811e32853b102004137a2903b6171a607721acc89040b08312d6440"
+}
+
+
+// With Matic
+# /api/root/grantRole           // predicate
+# /api/root/mint                // tokenId
+# /api/root/approveWithMatic
+# /api/root/depositWithMatic
+# je me rend sur Mumbai
+
+# nouveau token depuis Mumbai -> rien

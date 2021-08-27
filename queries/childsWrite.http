@@ -2,10 +2,12 @@
 // documentation: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 
 @pathURL = http://localhost:3001
-@childAddress = 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
+@childAddress = 0x554DAc4f6d076290dBa8469E9F2d1090A6DEd458
 // childAddressToken6: 0x5e461b51f270947340b71b5d3a9fcB0C47EEb15b
-@rootAddress = 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+// childAddressToken7: 0x554DAc4f6d076290dBa8469E9F2d1090A6DEd458
+@rootAddress = 0x5E891015ED99d7C5c9eB5527658B4649F3f26c45
 // rootAddressToken6: 0x1361d78d3375Eb11E0cc5a8a3423E3aC7c2513A5
+// rootAddressToken7: 0x5E891015ED99d7C5c9eB5527658B4649F3f26c45
 @owner = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
 @from = 0x91dDd8332bB2c94661D2192b15B93e27f0fEcEBA
 @to = 0x43e6B95803ac909f31C46517691cd2e33e298e40
@@ -16,6 +18,7 @@
 // MintableERC721PredicateProxy: 0x56E14C4C1748a818a5564D33cF774c59EB3eDF59
 @operator = 0xBbD7cBFA79faee899Eaf900F13C9065bF03B1A74
 // RootChainManager: 0xBbD7cBFA79faee899Eaf900F13C9065bF03B1A74 // RootChainManagerProxy
+@clearapprove = 0x0000000000000000000000000000000000000000
 
 ###
 POST {{pathURL}}/api/child/mint HTTP/1.1
@@ -44,7 +47,7 @@ content-type: application/json
   "from": "{{from}}",
   "to": "{{to}}",
   "nftAddress": "{{childAddress}}",
-  "tokenId": 1
+  "tokenId": 15
 }
 ###
 POST {{pathURL}}/api/child/approve HTTP/1.1
@@ -54,7 +57,7 @@ content-type: application/json
   "owner": "{{owner}}",
   "nftAddress": "{{childAddress}}",
   "to": "{{predicate}}",
-  "tokenId": 1
+  "tokenId": 15
 }
 ###
 POST {{pathURL}}/api/child/approvalAll HTTP/1.1
@@ -73,7 +76,7 @@ content-type: application/json
   "from": "{{from}}",
   "to": "{{to}}",
   "nftAddress": "{{childAddress}}",
-  "tokenId": 2
+  "tokenId": 13
 }
 ###
 POST {{pathURL}}/api/child/safeTransferFrom HTTP/1.1
@@ -83,17 +86,17 @@ content-type: application/json
   "from": "{{from}}",
   "to": "{{to}}",
   "nftAddress": "{{childAddress}}",
-  "tokenId": 3
+  "tokenId": 15
 }
 ###
 POST {{pathURL}}/api/child/deposit HTTP/1.1
 content-type: application/json
 
 {
-  "userAddress": "{{from}}",
+  "user": "{{from}}",
   "nftAddress": "{{childAddress}}",
   "rootToken": "{{rootAddress}}",
-  "tokenId": 1
+  "tokenId": 15
 }
 ###
 POST {{pathURL}}/api/child/burn HTTP/1.1
@@ -102,14 +105,41 @@ content-type: application/json
 {
   "from": "{{from}}",
   "nftAddress": "{{childAddress}}",
-  "tokenId": 1
+  "tokenId": 15
 }
 ###
-POST {{pathURL}}/api/child/exits HTTP/1.1
+POST {{pathURL}}/api/child/burnWithMatic HTTP/1.1
 content-type: application/json
 
 {
   "from": "{{from}}",
   "nftAddress": "{{childAddress}}",
-  "tokenId": 1
+  "tokenId": "18"
 }
+###
+POST {{pathURL}}/api/child/exitsWithMatic HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "to": "{{predicate}}",
+  "burnHash": "0x42f9f43816f41de3b04a274d2f7c1a3fd0931aa41b11fee1e3337a9e5c8d0765"
+}
+###
+POST {{pathURL}}/api/child/exitsWithMatic1 HTTP/1.1
+content-type: application/json
+
+{
+  "from": "{{from}}",
+  "to": "{{predicate}}",
+  "burnHash": "0x42f9f43816f41de3b04a274d2f7c1a3fd0931aa41b11fee1e3337a9e5c8d0765"
+}
+
+
+# /api/child/mint
+# /api/child/burnWithMatic
+# /api/child/exitsWithMatic
+
+# nouveau token depuis Goerli -> (utilisable)
+
+# /api/child/transferFrom

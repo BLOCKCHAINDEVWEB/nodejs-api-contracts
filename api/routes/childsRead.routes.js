@@ -3,6 +3,7 @@ import path from 'path'
 import express from 'express'
 import { ethers } from 'ethers'
 import KoChild6 from '../artifacts6/tokenNFT.json'
+import KoChild7 from '../artifacts7/tokenNFT.json'
 import config from '../../config'
 
 const router = express.Router()
@@ -15,7 +16,7 @@ const providerChild = new ethers.providers.JsonRpcProvider(maticProvider)
 router.post('/details', async (req, res) => {
   try {
     const { nftAddress } = req.body
-    const childContract = new ethers.Contract(nftAddress, KoChild6.abi, providerChild)
+    const childContract = new ethers.Contract(nftAddress, KoChild7.abi, providerChild)
     const name = await childContract.name()
     const symbol = await childContract.symbol()
     const baseURI = await childContract.baseURI()
@@ -29,7 +30,7 @@ router.post('/details', async (req, res) => {
 router.post('/balance', async (req, res) => {
   try {
     const { owner, nftAddress } = req.body
-    const childContract = new ethers.Contract(nftAddress, KoChild6.abi, providerChild)
+    const childContract = new ethers.Contract(nftAddress, KoChild7.abi, providerChild)
     const balanceOf = Number(await childContract.balanceOf(owner))
 
     res.status(200).json({ status: 'success', balanceOf: balanceOf })
@@ -41,7 +42,7 @@ router.post('/balance', async (req, res) => {
 router.post('/tokenURI', async (req, res) => {
   try {
     const { nftAddress, tokenId } = req.body
-    const childContract = new ethers.Contract(nftAddress, KoChild6.abi, providerChild)
+    const childContract = new ethers.Contract(nftAddress, KoChild7.abi, providerChild)
     const tokenURI = await childContract.tokenURI(tokenId)
 
     res.status(200).json({ status: 'success', tokenURI: tokenURI })
@@ -53,7 +54,7 @@ router.post('/tokenURI', async (req, res) => {
 router.post('/tokenByIndex', async (req, res) => {
   try {
     const { owner, nftAddress, index } = req.body
-    const childContract = new ethers.Contract(nftAddress, KoChild6.abi, providerChild)
+    const childContract = new ethers.Contract(nftAddress, KoChild7.abi, providerChild)
     const tokenByIndex = Number(await childContract.tokenOfOwnerByIndex(owner, index))
 
     res.status(200).json({ status: 'success', tokenByIndex: tokenByIndex })
@@ -65,7 +66,7 @@ router.post('/tokenByIndex', async (req, res) => {
 router.post('/totalSupply', async (req, res) => {
   try {
     const { nftAddress } = req.body
-    const childContract = new ethers.Contract(nftAddress, KoChild6.abi, providerChild)
+    const childContract = new ethers.Contract(nftAddress, KoChild7.abi, providerChild)
     const totalSupply = Number(await childContract.totalSupply())
 
     res.status(200).json({ status: 'success', totalSupply: totalSupply })
@@ -77,7 +78,7 @@ router.post('/totalSupply', async (req, res) => {
 router.post('/isApprovalAll', async (req, res) => {
   try {
     const { nftAddress, owner, operator } = req.body
-    const childContract = new ethers.Contract(nftAddress, KoChild6.abi, providerChild)
+    const childContract = new ethers.Contract(nftAddress, KoChild7.abi, providerChild)
     const isApproval = await childContract.isApprovedForAll(owner, operator)
 
     res.status(200).json({ status: 'success', isApproval: isApproval })
@@ -89,7 +90,7 @@ router.post('/isApprovalAll', async (req, res) => {
 router.post('/approved', async (req, res) => {
   try {
     const { nftAddress, tokenId } = req.body
-    const childContract = new ethers.Contract(nftAddress , KoChild6.abi , providerChild)
+    const childContract = new ethers.Contract(nftAddress , KoChild7.abi , providerChild)
 
     const addressApprove = await childContract.getApproved(tokenId)
 
@@ -102,7 +103,7 @@ router.post('/approved', async (req, res) => {
 router.post('/encodeMetadata', async (req, res) => {
   try {
     const { nftAddress, tokenId } = req.body
-    const childContract = new ethers.Contract(nftAddress, KoChild6.abi, providerChild)
+    const childContract = new ethers.Contract(nftAddress, KoChild7.abi, providerChild)
     const encodeMetadata = await childContract.encodeTokenMetadata(tokenId)
 
     res.status(200).json({ status: 'success', encodeMetadata: encodeMetadata })
