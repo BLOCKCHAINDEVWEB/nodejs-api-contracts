@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@maticnetwork/maticjs": "^2.0.45",
+    "@maticnetwork/maticjs": "^3.6.0-beta.3",
     "@truffle/hdwallet-provider": "^1.5.0",
     "dotenv": "^9.0.1",
     "esm": "^3.2.25",
